@@ -163,22 +163,17 @@ async def generate_proposal(
         return result
 
     except Exception as e:
-        print(f"[Gemini Error] {type(e).__name__}: {e}")
+        error_msg = f"{type(e).__name__}: {str(e)}"
+        print(f"[Gemini Error] {error_msg}")
         # Return a fallback response
         return {
             "proposal_text": (
-                "Thank you for posting this opportunity. I'm very interested in this project "
-                "and believe my skills and experience make me a strong fit. I'd love to discuss "
-                "the details further and share how I can contribute to your team's success.\n\n"
-                "Please feel free to review my portfolio items attached below. "
-                "I look forward to hearing from you!"
+                f"⚠️ **AI Generation Failed**\n\n"
+                f"An error occurred while communicating with the Gemini API:\n\n`{error_msg}`\n\n"
+                f"**How to fix:**\n"
+                f"1. Make sure you have added `GEMINI_API_KEY` to your Vercel Project Settings -> Environment Variables.\n"
+                f"2. Make sure you hit 'Redeploy' after adding the variable.\n"
+                f"3. Check that your API key is valid and has billing/quota available."
             ),
-            "attachments": [
-                {
-                    "portfolio_item_id": item["id"],
-                    "rationale": f"Relevant experience: {item['title']}",
-                    "rank": idx + 1,
-                }
-                for idx, item in enumerate(portfolio_items[:3])
-            ],
+            "attachments": []
         }
