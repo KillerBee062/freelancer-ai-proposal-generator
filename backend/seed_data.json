@@ -1,0 +1,49 @@
+{
+  "profile": {
+    "bio": "Full-stack developer with 5+ years building web and mobile apps. I specialize in React, Python, and cloud architecture. I turn complex requirements into clean, scalable solutions.",
+    "skills": ["React", "TypeScript", "Python", "FastAPI", "PostgreSQL", "AWS", "Docker", "Figma", "REST APIs", "GraphQL"]
+  },
+  "portfolio_items": [
+    {
+      "title": "E-Commerce Platform Redesign",
+      "description": "Led full redesign of a Shopify-based e-commerce platform, improving conversion rate by 34%. Built custom React storefront with headless CMS integration.",
+      "url": "https://portfolio.example.com/ecommerce",
+      "tags": ["React", "E-Commerce", "UI/UX", "Shopify"]
+    },
+    {
+      "title": "Real-Time Analytics Dashboard",
+      "description": "Built a real-time analytics dashboard for a SaaS startup using React, D3.js, and FastAPI with WebSocket streaming. Handles 10K+ concurrent users.",
+      "url": "https://portfolio.example.com/analytics",
+      "tags": ["React", "FastAPI", "D3.js", "WebSockets", "Dashboard"]
+    },
+    {
+      "title": "Healthcare Appointment API",
+      "description": "Designed and built a RESTful API for a healthcare startup managing 50K+ patient appointments monthly. HIPAA-compliant with OAuth2 auth flows.",
+      "url": "https://portfolio.example.com/healthcare-api",
+      "tags": ["Python", "FastAPI", "PostgreSQL", "REST API", "Healthcare"]
+    }
+  ],
+  "sample_job": {
+    "raw_text": "Looking for an experienced full-stack developer to build a customer-facing dashboard for our SaaS analytics product. Must have strong React and Python skills. The dashboard will display real-time metrics, charts, and allow users to configure alerts. We need someone who can work independently, write clean code, and deliver within 4 weeks. Experience with WebSockets and data visualization libraries is a plus. Budget: $5,000\u2013$8,000."
+  },
+  "sample_proposal": {
+    "proposal_text": "Hi there,\n\nI'm excited about this opportunity \u2014 building a customer-facing analytics dashboard is right in my wheelhouse. With 5+ years of full-stack experience specializing in React and Python, I've built very similar products and can hit the ground running.\n\nMost recently, I built a real-time analytics dashboard for a SaaS startup that handles 10K+ concurrent users, using React for the frontend, D3.js for data visualization, and FastAPI with WebSocket streaming on the backend. That project is almost a blueprint for what you're describing \u2014 real-time metrics, interactive charts, and configurable alerts.\n\nMy approach would be to start with a clean component architecture in React + TypeScript, set up a FastAPI backend with WebSocket support for real-time data, and use D3.js (or Recharts for simpler chart needs) for the visualization layer. I'd deliver in iterative sprints with demos every week so we stay aligned.\n\nI work independently, write well-documented code, and take ownership of the full delivery. I'd love to discuss the technical details and timeline with you.\n\nLooking forward to hearing from you!",
+    "attachments": [
+      {
+        "portfolio_item_id": 2,
+        "rationale": "Directly relevant \u2014 a real-time analytics dashboard built with the same tech stack (React, FastAPI, WebSockets, D3.js).",
+        "rank": 1
+      },
+      {
+        "portfolio_item_id": 1,
+        "rationale": "Demonstrates strong React frontend skills and ability to deliver polished, conversion-focused user interfaces.",
+        "rank": 2
+      },
+      {
+        "portfolio_item_id": 3,
+        "rationale": "Shows backend API design expertise with FastAPI at scale \u2014 relevant to the dashboard's data layer.",
+        "rank": 3
+      }
+    ]
+  }
+}
