@@ -75,6 +75,7 @@ async def healthz():
 # ===========================================================================
 
 @app.get("/api/profile", response_model=ProfileResponse)
+@app.get("/profile", response_model=ProfileResponse)
 async def get_profile():
     """Return the freelancer profile (single-row table, id=1)."""
     with get_session() as session:
@@ -90,6 +91,7 @@ async def get_profile():
 
 
 @app.put("/api/profile", response_model=ProfileResponse)
+@app.put("/profile", response_model=ProfileResponse)
 async def upsert_profile(profile: ProfileUpdate):
     """Create or update the freelancer profile."""
     with get_session() as session:
@@ -116,6 +118,7 @@ async def upsert_profile(profile: ProfileUpdate):
 # ===========================================================================
 
 @app.get("/api/portfolio", response_model=list[PortfolioItemResponse])
+@app.get("/portfolio", response_model=list[PortfolioItemResponse])
 async def list_portfolio():
     """List all portfolio items."""
     with get_session() as session:
@@ -136,6 +139,7 @@ async def list_portfolio():
 
 
 @app.post("/api/portfolio", response_model=PortfolioItemResponse, status_code=201)
+@app.post("/portfolio", response_model=PortfolioItemResponse, status_code=201)
 async def create_portfolio_item(item: PortfolioItemCreate):
     """Create a new portfolio item."""
     with get_session() as session:
@@ -168,6 +172,7 @@ async def create_portfolio_item(item: PortfolioItemCreate):
 
 
 @app.put("/api/portfolio/{item_id}", response_model=PortfolioItemResponse)
+@app.put("/portfolio/{item_id}", response_model=PortfolioItemResponse)
 async def update_portfolio_item(item_id: int, item: PortfolioItemCreate):
     """Update an existing portfolio item."""
     with get_session() as session:
@@ -206,6 +211,7 @@ async def update_portfolio_item(item_id: int, item: PortfolioItemCreate):
 
 
 @app.delete("/api/portfolio/{item_id}", status_code=204)
+@app.delete("/portfolio/{item_id}", status_code=204)
 async def delete_portfolio_item(item_id: int):
     """Delete a portfolio item."""
     with get_session() as session:
@@ -226,6 +232,7 @@ async def delete_portfolio_item(item_id: int):
 # ===========================================================================
 
 @app.post("/api/proposals/generate", response_model=ProposalResponse)
+@app.post("/proposals/generate", response_model=ProposalResponse)
 async def generate_proposal_endpoint(request: GenerateRequest):
     """Generate a proposal for a job posting using Gemini AI."""
     with get_session() as session:
@@ -312,6 +319,7 @@ async def generate_proposal_endpoint(request: GenerateRequest):
 
 
 @app.get("/api/proposals", response_model=list[ProposalListItem])
+@app.get("/proposals", response_model=list[ProposalListItem])
 async def list_proposals():
     """List all proposals with snippets."""
     with get_session() as session:
@@ -335,6 +343,7 @@ async def list_proposals():
 
 
 @app.get("/api/proposals/{proposal_id}", response_model=ProposalResponse)
+@app.get("/proposals/{proposal_id}", response_model=ProposalResponse)
 async def get_proposal(proposal_id: int):
     """Get full proposal details including job text and attachments with titles."""
     with get_session() as session:
@@ -365,6 +374,7 @@ async def get_proposal(proposal_id: int):
 
 
 @app.put("/api/proposals/{proposal_id}", response_model=ProposalResponse)
+@app.put("/proposals/{proposal_id}", response_model=ProposalResponse)
 async def update_proposal(proposal_id: int, update: ProposalUpdate):
     """Update the proposal text only."""
     with get_session() as session:
