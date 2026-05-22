@@ -31,7 +31,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker, Session
 _dotenv_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(_dotenv_path)
 
-_DEFAULT_DB_URL = "sqlite:////tmp/app.db" if os.getenv("VERCEL") else "sqlite:///app.db"
+
 
 Base = declarative_base()
 
@@ -81,7 +81,15 @@ class ProposalRow(Base):
 
 def get_database_url() -> str:
     """Return the DATABASE_URL from the environment (or the default)."""
-    return os.getenv("DATABASE_URL", _DEFAULT_DB_URL)
+    url = os.environ.get("DATABASE_URL")
+    if url:
+        return url
+    
+    # Fallback for read-only serverless environments
+    if os.environ.get("VERCEL") or not os.access(".", os.W_OK):
+        return "sqlite:////tmp/app.db"
+    
+    return "sqlite:///app.db"
 
 
 def _make_connect_args(url: str) -> dict:
