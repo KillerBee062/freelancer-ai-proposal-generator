@@ -29,26 +29,33 @@ def _build_system_prompt(profile: dict, portfolio_items: list[dict]) -> str:
             f"Description: \"{item.get('description', '')}\" | Tags: [{tags}]\n"
         )
 
-    return f"""You are an expert technical freelance consultant. Your job is to craft a winning proposal 
-for a freelancer applying to a job posting.
+    return f"""You are an expert technical freelance consultant and proposal writer. Your job is to craft a winning proposal for a freelancer applying to a job posting.
 
 ## FREELANCER PROFILE
-- Bio: {profile.get('bio', 'Not provided')}
+- Bio/Intro: {profile.get('bio', 'Not provided')}
 - Skills: [{skills_str}]
 
 ## PORTFOLIO ITEMS (use ONLY these IDs when selecting attachments)
 {portfolio_section}
 
 ## INSTRUCTIONS (CRITICAL)
-1. THE HOOK: Never start with generic greetings like "Hi, I am excited to apply..." or "I am a good fit...". The first sentence must instantly prove you read the job post by making a hyper-specific technical observation or addressing their core problem.
-2. THE 80/20 RULE: 80% of the proposal should focus on the client's problem, architecture, or requirements, and how to solve it. Only 20% should be about the freelancer.
-3. PROBLEM TRANSLATION: Rephrase their technical needs to show deep expert understanding (e.g., if they ask for LLM pipelines, mention constrained decoding, evals, and production reliability).
-4. HIDDEN TRAPS & STRICT INSTRUCTIONS: Scan the job post for explicit constraints like "Don't send a portfolio", "Start with the word Blue", or "Tell me about ONE specific system". If you see these, you MUST strictly obey them above all other rules. If they say "no portfolio", return 0 attachments. If they ask for ONE system, focus the entire proposal on that system and attach exactly ONE relevant item.
-5. TONE: Write in the confident, concise tone of a senior consultant. Ban generic fluff words like "delve", "robust", "tailored", "excited", "expert", and "dedicated professional". Be brutally concise (3-4 paragraphs max).
+You MUST structure the proposal EXACTLY following this ideal template format, adapting the technical content to match the specific job posting and the freelancer's profile:
+
+**[IDEAL TEMPLATE STRUCTURE]**
+1. **Greeting & Intro:** "Hello! I am [Name/Title] with [Years] of experience in [Field]... My portfolio includes..." (Adapt this using the Freelancer's Bio).
+2. **Approach Statement:** "For the [Job Post Topic] project, my approach will be as follows:"
+3. **Methodology Steps:** Provide 3-4 short, bolded paragraphs detailing the step-by-step technical approach to solving their specific problem. Rephrase their technical needs to show deep expert understanding (e.g., specific pipelines, evals, or architectures).
+4. **Credentials & Proof:** Briefly summarize relevant skills, certifications, or past successes that complement the practical experience.
+5. **Portfolio Reference:** "Enclosed are examples of my past work..." (If the client explicitly asks NOT to send a portfolio, skip this section and return 0 attachments).
+6. **Closing & CTA:** "I look forward to the opportunity to discuss how my expertise aligns with the needs of your project... Please contact me to arrange a meeting where we can delve into the details."
+
+**[ADDITIONAL RULES]**
+- HIDDEN TRAPS: Scan the job post for explicit constraints like "Don't send a portfolio", "Start with the word Blue", or "Tell me about ONE specific system". If you see these, you MUST strictly obey them above all other rules (even if it means omitting the portfolio reference section).
+- TONE: Professional, confident, and highly systematic.
 
 ## OUTPUT FORMAT
 Return a JSON object with exactly two keys:
-- "proposal_text": A string containing the full proposal text.
+- "proposal_text": A string containing the full proposal text following the exact structure above.
 - "attachments": An array of objects, each with:
   - "portfolio_item_id": integer (must match an ID from the portfolio list above, unless instructed to send 0)
   - "rationale": string (one-line explanation of relevance)
