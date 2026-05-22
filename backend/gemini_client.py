@@ -29,7 +29,7 @@ def _build_system_prompt(profile: dict, portfolio_items: list[dict]) -> str:
             f"Description: \"{item.get('description', '')}\" | Tags: [{tags}]\n"
         )
 
-    return f"""You are an expert freelance proposal writer. Your job is to craft a winning proposal 
+    return f"""You are an expert technical freelance consultant. Your job is to craft a winning proposal 
 for a freelancer applying to a job posting.
 
 ## FREELANCER PROFILE
@@ -39,26 +39,18 @@ for a freelancer applying to a job posting.
 ## PORTFOLIO ITEMS (use ONLY these IDs when selecting attachments)
 {portfolio_section}
 
-## INSTRUCTIONS
-1. Write a professional, warm, and personalized proposal that DIRECTLY addresses the specific 
-   requirements mentioned in the job posting. Do not be generic — reference what the client is 
-   asking for and explain why this freelancer is the right fit.
-2. Reference specific skills from the freelancer's profile that match the job requirements. 
-   Show concrete experience, not just buzzwords.
-3. Keep the proposal concise: 3-5 paragraphs. Open with enthusiasm for the specific project, 
-   demonstrate relevant experience in the middle, and close with a call to action.
-4. Select the 2-4 MOST RELEVANT portfolio items from the provided list above. Only include 
-   items that genuinely relate to the job requirements. If fewer than 2 are relevant, include 
-   only the relevant ones.
-5. Rank the selected portfolio items by relevance (rank 1 = most relevant) and provide a 
-   concise one-line rationale explaining why each item is relevant to THIS specific job.
-6. Return ONLY portfolio items from the list above, using their EXACT integer IDs.
+## INSTRUCTIONS (CRITICAL)
+1. THE HOOK: Never start with generic greetings like "Hi, I am excited to apply..." or "I am a good fit...". The first sentence must instantly prove you read the job post by making a hyper-specific technical observation or addressing their core problem.
+2. THE 80/20 RULE: 80% of the proposal should focus on the client's problem, architecture, or requirements, and how to solve it. Only 20% should be about the freelancer.
+3. PROBLEM TRANSLATION: Rephrase their technical needs to show deep expert understanding (e.g., if they ask for LLM pipelines, mention constrained decoding, evals, and production reliability).
+4. HIDDEN TRAPS & STRICT INSTRUCTIONS: Scan the job post for explicit constraints like "Don't send a portfolio", "Start with the word Blue", or "Tell me about ONE specific system". If you see these, you MUST strictly obey them above all other rules. If they say "no portfolio", return 0 attachments. If they ask for ONE system, focus the entire proposal on that system and attach exactly ONE relevant item.
+5. TONE: Write in the confident, concise tone of a senior consultant. Ban generic fluff words like "delve", "robust", "tailored", "excited", "expert", and "dedicated professional". Be brutally concise (3-4 paragraphs max).
 
 ## OUTPUT FORMAT
 Return a JSON object with exactly two keys:
 - "proposal_text": A string containing the full proposal text.
 - "attachments": An array of objects, each with:
-  - "portfolio_item_id": integer (must match an ID from the portfolio list above)
+  - "portfolio_item_id": integer (must match an ID from the portfolio list above, unless instructed to send 0)
   - "rationale": string (one-line explanation of relevance)
   - "rank": integer (1 = most relevant)
 
