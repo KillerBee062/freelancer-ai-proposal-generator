@@ -31,7 +31,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker, Session
 _dotenv_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(_dotenv_path)
 
-_DEFAULT_DB_URL = "sqlite:///app.db"
+_DEFAULT_DB_URL = "sqlite:////tmp/app.db" if os.getenv("VERCEL") else "sqlite:///app.db"
 
 Base = declarative_base()
 
